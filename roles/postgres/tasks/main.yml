@@ -7,14 +7,14 @@
 
 - name: ensure database is created
   become: true
-  become_user: psql
+  become_user: postgres
   postgresql_db:
     name: "{{ dbname }}"
     encoding: UTF-8
 
 - name: ensure user has access to database
   become: true
-  become_user: psql
+  become_user: postgres
   postgresql_user:
     db: "{{ dbname }}"
     name: "{{ dbuser }}"
@@ -22,7 +22,7 @@
 
 - name: ensure user hasbeen granted all privileges
   become: true
-  become_user: psql
+  become_user: postgres
   postgresql_privs:
     db: "{{ dbname }}"
     type: database
