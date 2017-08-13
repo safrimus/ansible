@@ -1,0 +1,24 @@
+---
+- name: install postresql
+  apt:
+    name: postgresql
+    state: latest
+    update_cache: yes
+
+- name: ensure database is created
+  postgresql_db:
+    name: "{{ dbname }}"
+    encoding: UTF-8
+
+- name: ensure user has access to database
+  postgresql_user:
+    db: "{{ dbname }}"
+    name: "{{ dbuser }}"
+    password: "{{ dbpassword }}"
+
+- name: ensure user hasbeen granted all privileges
+  postgresql_privs:
+    db: "{{ dbname }}"
+    type: database
+    priv: ALL
+    role: "{{ dbuser }}"

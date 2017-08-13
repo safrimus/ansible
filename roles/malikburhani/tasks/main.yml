@@ -1,0 +1,10 @@
+---
+- name: create django project directory
+  file:
+    path: "{{ ansible_env.HOME }}/malikburhani"
+    state: directory
+
+- name: get django project source code from git
+  git:
+    repo: "https://github.com/safrimus/pos.git"
+    dest: "{{ ansible_env.HOME }}/malikburhani/"
