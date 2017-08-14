@@ -1,12 +1,26 @@
 ---
-- name: install-psycopg2
+- name: install apt packages
   apt:
-    name: python-psycopg2
+    name: "{{ item }}"
+    update_cache: yes
     state: latest
-    update_cache: yes  
+  with_items:
+    - python3-psycopg2
+    - libpq-dev
+    - postgresql
+    - python3-pip
 
-- name: libpq-dev
-  apt:
-    name: libpq-dev
+- name: update pip3
+  pip:
+    name: pip
+    extra_args: --upgrade
+
+- name: install pip packages
+  pip:
+    name: "{{ item }}"
     state: latest
-    update_cache: yes    
+  with_items:
+    - django
+    - gunicorn
+    - django-cors-headers
+    - djangorestframework
