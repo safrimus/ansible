@@ -1,0 +1,25 @@
+---
+- name: get pos source code from git
+  git:
+    repo: "https://github.com/safrimus/pos.git"
+    dest: "{{ lookup('env', 'HOME') }}/pos"
+
+- name: delete default.conf nginx file
+  file:
+    path: /etc/nginx/conf.d/default.conf
+    state: absent
+
+- name: place malikburhani nginx conf file
+  template:
+    src: malikburhani.conf.j2
+    dest: /etc/nginx/conf.d/malikburhani.conf
+
+- name: place pos nginx conf file
+  template:
+    src: pos.conf.j2
+    dest: /etc/nginx/conf.d/pos.conf
+
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted

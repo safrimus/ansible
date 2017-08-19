@@ -1,0 +1,24 @@
+# Django running with Gunicorn Sock file
+
+server {
+    listen 80;
+    server_name localhost;
+
+    access_log /var/log/nginx/malikburhani-access.log;
+    error_log /var/log/nginx/malikburhani-error.log;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+
+    location /static/ {
+        autoindex on;
+        root {{ lookup('env', 'HOME') }}/malikburhani;
+    }
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://unix:{{ lookup('env', 'HOME') }}/malikburhani/gunicorn.sock;
+    }
+}

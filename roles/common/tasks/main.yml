@@ -1,14 +1,26 @@
 ---
+# Add apt key and repo for nginx
+- apt_key:
+    url: http://nginx.org/keys/nginx_signing.key
+    state: present
+
+- apt_repository:
+    repo: 'deb http://nginx.org/packages/mainline/ubuntu/ xenial nginx'
+    state: present
+    filename: 'nginx'
+
 - name: install apt packages
   apt:
     name: "{{ item }}"
     update_cache: yes
     state: latest
   with_items:
+    - chromium-browser
     - python3-psycopg2
     - libpq-dev
     - postgresql
     - python3-pip
+    - nginx
 
 - name: update pip3
   pip:

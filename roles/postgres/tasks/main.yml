@@ -22,3 +22,8 @@
     type: database
     priv: ALL
     role: "{{ dbuser }}"
+
+- name: migrate the database
+  command: python3 manage.py migrate
+  args:
+    chdir: "{{ lookup('env', 'HOME') }}/malikburhani"
