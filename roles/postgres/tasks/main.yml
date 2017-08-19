@@ -24,6 +24,6 @@
     role: "{{ dbuser }}"
 
 - name: migrate the database
-  django_manage:
-    command: migrate
-    app_path: "{{ lookup('env', 'HOME') }}/malikburhani"
+  command: python3 manage.py migrate
+  args:
+    chdir: "{{ lookup('env', 'HOME') }}/malikburhani"
