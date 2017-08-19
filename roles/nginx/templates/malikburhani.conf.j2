@@ -1,0 +1,21 @@
+# Django running with Gunicorn Sock file
+
+server {
+    listen 80;
+    server_name localhost;
+
+    access_log {{ lookup('env', 'HOME') }}/malikburhani/logs/nginx-access.log;
+    error_log {{ lookup('env', 'HOME') }}/malikburhani/logs/nginx-error.log;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+
+    location /static/ {
+        autoindex on;
+        root {{ lookup('env', 'HOME') }}/malikburhani;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:{{ lookup('env', 'HOME') }}/gunicorn.sock;
+    }
+}
