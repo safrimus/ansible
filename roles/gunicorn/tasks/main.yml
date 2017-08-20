@@ -1,10 +1,4 @@
 ---
-- name: disable the package supplied init.d script
-  service:
-    name: gunicorn
-    state: stopped
-    enabled: no
-
 - name: delete existing gunicorn systemd service file if it exists
   file:
     path: /etc/systemd/system/gunicorn.service
