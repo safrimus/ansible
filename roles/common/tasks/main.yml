@@ -36,3 +36,4 @@
     - gunicorn
     - django-cors-headers
     - djangorestframework
+    - django-filter
