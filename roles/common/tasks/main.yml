@@ -38,3 +38,4 @@
     - djangorestframework
     - django-filter
     - djangorestframework-queryfields
+    - django-naturalsortfield
