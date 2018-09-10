@@ -27,14 +27,32 @@
     name: pip
     extra_args: --upgrade
 
-- name: install pip packages
+- name: install django
   pip:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-    - django
-    - gunicorn
-    - django-cors-headers
-    - djangorestframework
-    - django-filter
-    - djangorestframework-queryfields
+    name: django
+    version: 2.1
+
+- name: install gunicorn
+  pip:
+    name: gunicorn
+    version: 19.9.0
+
+- name: install django-cors-headers
+  pip:
+    name: django-cors-headers
+    version: 2.4.0
+
+- name: install djangorestframework
+  pip:
+    name: djangorestframework
+    version: 3.8.2
+
+- name: install django-filter
+  pip:
+    name: django-filter
+    version: 2.0.0
+
+- name: install djangorestframework-queryfields
+  pip:
+    name: djangorestframework-queryfields
+    version: 1.0.0
