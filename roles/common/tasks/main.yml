@@ -56,3 +56,13 @@
   pip:
     name: djangorestframework-queryfields
     version: 1.0.0
+
+- name: install xlwt
+  pip:
+    name: xlwt
+    version: 1.3.0
+
+- name: install xlrd
+  pip:
+    name: xlrd
+    version: 1.2.0
