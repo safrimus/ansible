@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 WorkingDirectory={{ lookup('env', 'HOME') }}/malikburhani
-ExecStart=/usr/local/bin/gunicorn --workers 1 --bind unix:{{ lookup('env', 'HOME') }}/malikburhani/gunicorn.sock malikburhani.wsgi:application
+ExecStart=/usr/local/bin/gunicorn --workers 4 --timeout 90 --bind unix:{{ lookup('env', 'HOME') }}/malikburhani/gunicorn.sock malikburhani.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
