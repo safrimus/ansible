@@ -16,6 +16,7 @@
     state: latest
   with_items:
     - chromium-browser
+    - vim
     - python3-psycopg2
     - libpq-dev
     - postgresql
