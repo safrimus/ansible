@@ -29,3 +29,11 @@
     - python3-django-filters
     - python3-xlwt
     - python3-xlrd
+
+- name: Install drf-queryfields directly from GitHub
+  ansible.builtin.pip:
+    name: "git+https://github.com/wimglenn/djangorestframework-queryfields.git"
+    state: present
+    # Use --break-system-packages ONLY if you aren't using a virtualenv
+    extra_args: "--break-system-packages" 
+  become: true
