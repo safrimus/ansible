@@ -23,6 +23,16 @@
     priv: ALL
     role: "{{ dbuser }}"
 
+- name: ensure user has privileges on the public schema
+  become: true
+  become_user: postgres
+  postgresql_privs:
+    db: "{{ dbname }}"
+    type: schema
+    objs: public
+    priv: ALL
+    role: "{{ dbuser }}"
+
 - name: migrate the database
   command: python3 manage.py migrate
   args:
