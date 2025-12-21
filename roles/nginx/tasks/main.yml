@@ -1,8 +1,28 @@
 ---
+- name: Ensure /var/www exists and has correct base permissions
+  ansible.builtin.file:
+    path: "/var/www"
+    state: directory
+    mode: '0755'
+
 - name: get pos source code from git
   git:
     repo: "https://github.com/safrimus/pos.git"
     dest: "{{ lookup('env', 'HOME') }}/pos"
+
+- name: Set ownership and permissions for Nginx
+  ansible.builtin.file:
+    path: "/var/www/pos"
+    owner: www-data
+    group: www-data
+    recurse: yes
+    state: directory
+    mode: '0755'
+
+- name: Ensure files inside have read permissions
+  ansible.builtin.command:
+    cmd: "find /var/www/pos/ -type f -exec chmod 644 {} +"
+  changed_when: false
 
 - name: delete default.conf nginx file
   file:
