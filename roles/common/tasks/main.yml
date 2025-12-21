@@ -11,8 +11,9 @@
     - python3-psycopg2
     - libpq-dev
     - postgresql
-    - python3-pip
     - nginx
+    - gunicorn
+    - python3-pip
     - python3-django
     - python3-gunicorn
     - python3-django-cors-headers
