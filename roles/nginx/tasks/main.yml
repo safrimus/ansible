@@ -10,13 +10,13 @@
 
 - name: get pos source code from git
   git:
-    repo: "https://github.com/safrimus/pos.git"
-    dest: "{{ lookup('env', 'HOME') }}/pos"
+    repo: https://github.com/safrimus/pos.git
+    dest: {{ lookup('env', 'HOME') }}/pos
 
 - name: Copy files from home to /var/www
   ansible.builtin.copy:
-    src: "{{ lookup('env', 'HOME') }}/pos/."
-    dest: "/var/www/pos/."
+    src: {{ lookup('env', 'HOME') }}/pos/.
+    dest: /var/www/pos/.
     remote_src: yes
     owner: www-data
     group: www-data
@@ -33,6 +33,18 @@
     state: directory
     mode: 'u=rwX,g=rX,o=rX'
   become: true
+
+- name: Ensure Nginx can traverse the user home directory
+  ansible.builtin.file:
+    path: {{ lookup('env', 'HOME') }}
+    mode: '0751'
+    state: directory
+
+- name: Ensure Nginx can traverse the project directory
+  ansible.builtin.file:
+    path: {{ lookup('env', 'HOME') }}/malikburhani
+    mode: '0751'
+    state: directory
 
 - name: delete default.conf nginx file
   file:
