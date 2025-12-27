@@ -5,6 +5,9 @@ server {
     # Max upload size for database restores (10MB)
     client_max_body_size 10M;
 
+    access_log /var/log/nginx/malikburhani-access.log;
+    error_log /var/log/nginx/malikburhani-error.log;
+
     # 1. FRONTEND: Serve the UI files
     root /var/www/pos;
     index index.html;
